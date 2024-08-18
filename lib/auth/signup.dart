@@ -6,8 +6,9 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:views/routes/route_name.dart';
-import 'package:views/utils/type_def.dart';
 import 'package:views/widgets/auth_input.dart';
+
+import '../controller/auth_controller.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -22,10 +23,13 @@ class _signupState extends State<Signup> {
   final TextEditingController emailController=TextEditingController(text: "");
   final TextEditingController passwordController=TextEditingController(text: "");
   final TextEditingController passwordConfirmController=TextEditingController(text: "");
+  final AuthController controller = Get.put(AuthController());
 
   //Submit Method
   void submit(){
-    if(_form.currentState!.validate()){}
+    if(_form.currentState!.validate()){
+      controller.signup(nameController.text, emailController.text, passwordController.text);
+    }
   }
 
   @override
