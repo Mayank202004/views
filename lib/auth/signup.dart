@@ -56,32 +56,33 @@ class _signupState extends State<Signup> {
                       )
                   ),
                   const SizedBox(height:20),
-                  authInput(label: "Name",hinttext: "Enter your name",controller:nameController,validatorCallback: ValidationBuilder().required().maxLength(3).maxLength(50).build(),),
+                  authInput(label: "Name",hinttext: "Enter your name",controller:nameController,validatorCallback: ValidationBuilder().required().minLength(3).maxLength(50).build(),),
                   const SizedBox(height:20),
                   authInput(label: "Email",hinttext: "Enter your email",controller:emailController,validatorCallback: ValidationBuilder().required().email().build(),),
                   const SizedBox(height:20),
-                  authInput(label: "Password",hinttext: "Enter your password",isPassword: true,controller: passwordController,validatorCallback: ValidationBuilder().required().minLength(5).maxLength(20).build(),),
+                  authInput(label: "Password",hinttext: "Enter your password",isPassword: true,controller:passwordController,validatorCallback: ValidationBuilder().required().minLength(5).maxLength(20).build(),),
                   const SizedBox(height:20),
                   authInput(label: "Confirm Password",
                     hinttext: "Confirm your password",
                     isPassword: true,
                     controller: passwordConfirmController,
                     validatorCallback: (arg){
-                    if(passwordController!=arg) {
+                    if(passwordController.text!=arg) {
                       return "Confirm password not matched";
                     }else {
                       return null;
                     }},),
                   const SizedBox(height:20),
-                  ElevatedButton(
-                    onPressed: (){
-                      submit();
-                    },
-                    style: ButtonStyle(
-                      minimumSize: WidgetStateProperty.all(
-                          const Size.fromHeight(40)),
+                  Obx(() => ElevatedButton(
+                      onPressed: (){
+                        submit();
+                      },
+                      style: ButtonStyle(
+                        minimumSize: WidgetStateProperty.all(
+                            const Size.fromHeight(40)),
+                      ),
+                      child:  Text(controller.signupLoading.value ? "Processing..." :"Sign up"),
                     ),
-                    child: const Text("Sign up"),
                   ),
                   const SizedBox(height: 20,),
                   Text.rich(TextSpan(

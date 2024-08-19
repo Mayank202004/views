@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:views/routes/route_name.dart';
 import 'package:views/widgets/auth_input.dart';
 
+import '../controller/auth_controller.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -18,10 +20,13 @@ class LoginState extends State<Login> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   final TextEditingController emailController=TextEditingController(text: "");
   final TextEditingController passwordController=TextEditingController(text: "");
+  final AuthController controller = Get.put(AuthController());
 
   //Submit Method
   void submit(){
-    if(_form.currentState!.validate()){}
+    if(_form.currentState!.validate()){
+      controller.login(emailController.text, passwordController.text);
+    }
   }
 
   @override
