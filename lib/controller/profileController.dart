@@ -25,7 +25,7 @@ class ProfileController extends GetxController{
       // Update User Profile
       await SupabaseService.SupabaseClientclient.auth.updateUser(UserAttributes(data: {
         "description":description,
-        "image":uploadedPath.isNotEmpty ? uploadedPath : null
+        if (uploadedPath.isNotEmpty) "image": uploadedPath,
       }));
       loading.value=false;
       Get.back();

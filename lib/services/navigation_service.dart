@@ -12,9 +12,9 @@ class NavigationService extends GetxService{
 
   List<Widget> pages(){
     return[
-      const Homepage(),
+      Homepage(),
       const Search(),
-      const AddView(),
+      AddView(),
       const Notifications(),
       const Profile(),
     ];
@@ -25,4 +25,9 @@ class NavigationService extends GetxService{
     prevIndex.value = currentIndex.value;
     currentIndex.value = index;
   }
+
+  // Back to previous page
+void backToPrevPage(){
+    currentIndex.value = prevIndex.value;
+}
 }

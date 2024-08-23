@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:views/controller/setting_Controller.dart';
+import 'package:views/utils/helper.dart';
 
 class Setting extends StatelessWidget {
-  const Setting({super.key});
+  Setting({super.key});
+
+  final SettingController settingController = Get.put(SettingController());
 
   @override
   Widget build(BuildContext context) {
@@ -9,13 +14,16 @@ class Setting extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             ListTile(
-              leading:  Icon(Icons.logout),
-              title: Text("Logout"),
-              trailing: Icon(Icons.arrow_forward),
+              onTap:() {
+                confirmDialog("Logout","Are you sure you want to logout",settingController.logout);
+              },
+              leading:  const Icon(Icons.logout),
+              title: const Text("Logout"),
+              trailing: const Icon(Icons.arrow_forward),
             )
           ],
         ),

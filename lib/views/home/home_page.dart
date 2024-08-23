@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:views/controller/homeController.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  Homepage({super.key});
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   State<Homepage> createState() => _HomepageState();

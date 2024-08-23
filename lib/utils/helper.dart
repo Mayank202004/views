@@ -5,6 +5,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:views/widgets/confirmDialog.dart';
 
 import 'env.dart';
 
@@ -32,11 +33,17 @@ Future<File?> pickImageFromGallery() async {
 
 // Compress file
 Future<File> compressImage(File file,String targetpath) async{
-  var result = await FlutterImageCompress.compressAndGetFile(file.path, targetpath,quality: 70);
+  var result = await FlutterImageCompress.compressAndGetFile(file.path, targetpath,quality: 50);
   return File(result!.path);
 }
 
 // To get image bucket url
 String getBucketUrl(String path){
   return "${Env.supabaseUrl}/storage/v1/object/public/$path";
+}
+
+
+// Open confirm dialog box
+void confirmDialog(String title,String text,VoidCallback voidCallback){
+  Get.dialog(DialogFb1(title: title,text: text,voidCallback: voidCallback));
 }
