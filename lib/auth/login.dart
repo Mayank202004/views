@@ -22,6 +22,14 @@ class LoginState extends State<Login> {
   final TextEditingController passwordController=TextEditingController(text: "");
   final AuthController controller = Get.put(AuthController());
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   //Submit Method
   void submit(){
     if(_form.currentState!.validate()){

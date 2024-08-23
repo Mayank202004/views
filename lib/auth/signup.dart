@@ -25,6 +25,15 @@ class _signupState extends State<Signup> {
   final TextEditingController passwordConfirmController=TextEditingController(text: "");
   final AuthController controller = Get.put(AuthController());
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordConfirmController.dispose();
+    super.dispose();
+  }
+
   //Submit Method
   void submit(){
     if(_form.currentState!.validate()){

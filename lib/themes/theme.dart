@@ -22,5 +22,10 @@ final ThemeData theme = ThemeData(
       backgroundColor: WidgetStateProperty.all(Colors.white),
       foregroundColor: WidgetStateProperty.all(Colors.black),
     )
+  ),
+  navigationBarTheme: const NavigationBarThemeData(
+    labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+    height: 60,
+    //indicatorColor: Colors.pink,
   )
 );

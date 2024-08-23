@@ -9,6 +9,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           bottomNavigationBar: NavigationBar(
+              indicatorColor: Colors.lightBlue[200],
               selectedIndex: navigationService.currentIndex.value,
               onDestinationSelected: (value) =>
                   navigationService.updateCurrentIndex(value),
