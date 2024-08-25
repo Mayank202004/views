@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:views/controller/replyController.dart';
 import 'package:views/models/postModel.dart';
+import 'package:views/services/supabase_services.dart';
 import 'package:views/widgets/imageAvatar.dart';
 
 import '../../utils/helper.dart';
@@ -10,6 +11,7 @@ class AddReply extends StatelessWidget {
   AddReply({super.key});
   final PostModel post = Get.arguments;
   final ReplyController controller = Get.put(ReplyController());
+  final SupabaseService supabaseService = Get.find<SupabaseService>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,17 @@ class AddReply extends StatelessWidget {
         leading: IconButton(onPressed: () => Get.back(), icon: const Icon(Icons.close)),
         title: const Text("Reply"),
         actions: [
-          TextButton(onPressed: (){}, child: const Text("Reply"))
+          Obx(() => TextButton(
+              onPressed: (){if(controller.reply.isNotEmpty){
+                controller.addReply(supabaseService.currentUser.value!.id, post.id!, post.userId!);
+                Get.back();
+              }
+            }, child:controller.loading.value ? const SizedBox(
+            height: 16,
+            width: 16,
+            child: CircularProgressIndicator(),) : Text("Reply",style: TextStyle(fontWeight: controller.reply.isNotEmpty ? FontWeight.bold : FontWeight.normal),)
+          ),
+          )
         ],
       ),
       body: SingleChildScrollView(

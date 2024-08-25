@@ -13,26 +13,29 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Image.asset("assets/images/logo_png.png",width: 40,height: 40,),
+        child: RefreshIndicator(
+          onRefresh: () => controller.fetchPosts(),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Image.asset("assets/images/logo_png.png",width: 40,height: 40,),
+                ),
+                centerTitle: true,
               ),
-              centerTitle: true,
-            ),
-            SliverToBoxAdapter(
-              child: Obx(()=> controller.loading.value ? const Loading() : ListView.builder(
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
-                itemCount: controller.posts.length,
-                itemBuilder: (BuildContext context, int index) => PostCard(post: controller.posts[index]),
-
-              )),
-            )
-          ],
+              SliverToBoxAdapter(
+                child: Obx(()=> controller.loading.value ? const Loading() : ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: controller.posts.length,
+                  itemBuilder: (BuildContext context, int index) => PostCard(post: controller.posts[index]),
+          
+                )),
+              )
+            ],
+          ),
         ),
       ),
     );
